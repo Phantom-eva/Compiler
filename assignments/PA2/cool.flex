@@ -43,11 +43,32 @@ extern YYSTYPE cool_yylval;
  *  Add Your own definitions here
  */
 
+ int comment_depth = 0;
+ int should_terminate = 0;
+ int in_nested_comment = 0;
+ int string_const_length = 0;
+
 %}
+
+%x NESTED_COMMENT
+%x SIMPLE_COMMENT
+%x STRING_CONSTANT
+%x ESCAPE
 
 /*
  * Define names for regular expressions here.
  */
+
+DIGIT [0-9]
+LOWERCASE_LETTER [a-z]
+UPPERCASE_LETTER [A-Z]
+LETTER ({LOWERCASE_LETTER}|{UPPERCASE_LETTER})
+BLANK (" "|\f|\t|\v)
+OPERATOR ("+"|"-"|"*"|"/")
+SINGLE_CHAR_TOKEN ("~"|"<"|"="|"("|")"|"{"|"}"|";"|":"|"."|","|"@")
+
+CLASS (?i:class)
+ELSE
 
 DARROW          =>
 
